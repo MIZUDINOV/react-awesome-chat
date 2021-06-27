@@ -1,7 +1,14 @@
-import { Button, createStyles, Typography } from '@material-ui/core'
 import React from 'react'
 
-export const Authentication = () => {
+import { Button, TextField, Typography } from '@material-ui/core'
+
+export const Authentication = ({
+  onSetName,
+  signInAnonymously,
+  onChangeDisplayName,
+  user,
+  name,
+}) => {
   return (
     <div
       style={{
@@ -10,6 +17,7 @@ export const Authentication = () => {
         justifyContent: 'center',
         alignItems: 'center',
         minHeight: '300px',
+        width: '100%',
       }}
     >
       <Typography
@@ -18,10 +26,28 @@ export const Authentication = () => {
         component='h3'
         align='center'
       >
-        Вы можете войти в чат используя анонимный аккаунт
+        {user
+          ? 'Введите отображаемое имя в чате'
+          : 'Вы можете войти в чат используя анонимный аккаунт'}
       </Typography>
-      <Button color='primary' variant='contained' align='center'>
-        Войти
+      {user ? (
+        <TextField
+          onChange={onSetName}
+          value={name}
+          placeholder='Логин'
+          style={{ marginBottom: '25px' }}
+          variant='outlined'
+        />
+      ) : null}
+      <Button
+        onClick={user ? onChangeDisplayName : signInAnonymously}
+        color='primary'
+        variant='contained'
+        align='center'
+        size='large'
+        disabled={user ? !name : false}
+      >
+        {user ? 'Войти' : 'Создать'}
       </Button>
     </div>
   )
