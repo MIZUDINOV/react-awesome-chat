@@ -26,8 +26,9 @@ function App() {
       style={{
         maxWidth: '760px',
         margin: '0 auto',
-        height: '100vh',
+        height: '85vh',
         display: 'flex',
+        flexDirection: 'column',
       }}
     >
       {!!user?.displayName ? (
